@@ -15,11 +15,9 @@ contract Project{
     address payable creator;
     uint public goalAmount;
     uint public deadLine;
-    uint public completeAt; // time when goalAmount is reached
     uint public currentBalance;
     string public title;
     string public description;
-    string public title;
     
     Fundingstage public stage= Fundingstage.Raising;    // initialised at Raising stage
     mapping(address=>uint) public contributions;
@@ -72,7 +70,6 @@ contract Project{
             stage=Fundingstage.Expired;
             emit ProjectExpired(true);
         }
-        completeAt=block.timestamp;
     }
 
     function payProject() internal stageOfFunding(Fundingstage.Successful){
@@ -145,5 +142,4 @@ contract Fundraiser{
     function returnProjects() public view returns(Project[] memory){
         return projects;
     }
-
 }
